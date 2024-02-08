@@ -7,4 +7,16 @@ function getUserData(id) {
         db2: db2,
         db3: db3,
     };
+    return new Promise((resolve, reject) => {
+        central(id)
+            .then((db) => {
+                return Promise.all([dbs[db](id), vault(id)]);
+            })
+            .then(([dbData, vaultData]) => {
+                resolve({ ...dbData, ...vaultData });
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
 }
