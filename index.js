@@ -11,6 +11,7 @@ const progressBar = document.getElementById('progressBar');
 const getFavouritesBtn = document.getElementById('getFavouritesBtn');
 
 // Step 0: Store your API key here for reference and easy access.
+const URL = 'https://api.thecatapi.com/v1/images/search';
 const API_KEY = '';
 
 /**
@@ -21,6 +22,34 @@ const API_KEY = '';
  *  - Each option should display text equal to the name of the breed.
  * This function should execute immediately.
  */
+async function initialLoad() {
+    try {
+        const body = {
+            limit: 10,
+            has_breeds: 1,
+        };
+        const headers = {
+            'x-api-key': API_KEY,
+        };
+        const queryString = new URLSearchParams(body).toString();
+        const fullURL = URL + '?' + queryString;
+        const response = await fetch(fullURL, {
+            method: 'GET',
+            headers: headers,
+        });
+        const data = await response.json();
+        data.forEach((breed) => {
+            const option = document.createElement('option');
+            option.value = breed.breeds[0].id;
+            option.textContent = breed.breeds[0].name;
+            breedSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+initialLoad();
 
 /**
  * 2. Create an event handler for breedSelect that does the following:
