@@ -87,7 +87,7 @@ breedSelect.addEventListener('change', async (event) => {
 });
 
 // Add a call to the event handler function at the end of initialLoad
-initialLoad().then(() => {
+initialLoadWithAxios().then(() => {
     if (breedSelect.options.length > 0) {
         breedSelect.value = breedSelect.options[0].value;
         breedSelect.dispatchEvent(new Event('change'));
@@ -106,6 +106,32 @@ initialLoad().then(() => {
  *   by setting a default header with your API key so that you do not have to
  *   send it manually with all of your requests! You can also set a default base URL!
  */
+
+async function initialLoadWithAxios() {
+    try {
+        const body = {
+            limit: 10,
+            has_breeds: 1,
+        };
+        const headers = {
+            'x-api-key': API_KEY,
+        };
+        const queryString = new URLSearchParams(body).toString();
+        const fullURL = URL + '?' + queryString;
+        const response = await axios.get(fullURL, {
+            headers: headers,
+        });
+        response.data.forEach((breed) => {
+            const option = document.createElement('option');
+            option.value = breed.breeds[0].id;
+            option.textContent = breed.breeds[0].name;
+            breedSelect.appendChild(option);
+        });
+    } catch (error) {
+        console.error('Failed to load cat images:', error);
+    }
+}
+
 /**
  * 5. Add axios interceptors to log the time between request and response to the console.
  * - Hint: you already have access to code that does this!
