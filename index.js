@@ -75,7 +75,6 @@ breedSelect.addEventListener('change', async (event) => {
             `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}&limit=5`
         );
         const images = await response.json();
-        console.log(images);
         for (let image of images) {
             const template = document.querySelector('#carouselItemTemplate');
             const clone = template.content.cloneNode(true);
