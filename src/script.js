@@ -10,7 +10,7 @@ const allPostsLink = document.querySelector('#all-posts');
 function createPostTile(post) {
     const postTile = postTileTemplate.content.cloneNode(true);
     postTile.querySelector('.post-title').innerText = post.title;
-    postTile.querySelector('.post-content').innerText = post.body;
+    postTile.querySelector('.post-body').innerText = post.body;
     postsContainer.appendChild(postTile);
 }
 
