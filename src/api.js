@@ -38,6 +38,16 @@ export async function getCommentsByPostId(id) {
     }
 }
 
+export async function getUserById(id) {
+    try {
+        const response = await fetch(`${API_URL}/users/${id}`);
+        const user = await response.json();
+        return user;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export async function createPost(_title, _body, _userId) {
     try {
         const response = await fetch(`${API_URL}/posts`, {

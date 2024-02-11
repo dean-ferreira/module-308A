@@ -33,6 +33,11 @@
     font-size: 2rem;
 }
 
+.post-links {
+    display: flex;
+    gap: 10rem;
+}
+
 .comments-link {
     align-self: end;
     justify-self: end;
