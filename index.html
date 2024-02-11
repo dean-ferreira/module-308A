@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTC</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <script src="./src/script.js" defer></script>
+</head>
+
+<body>
+    <header class="container">
+        <nav>
+            <a id="home-link" href="./index.html">
+                <h1 id="home-text">The Town Crier</h1>
+            </a>
+            <ul>
+                <li><a id="create-post" href="">Create Post</a></li>
+                <li><a id="all-posts" href="">All Posts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        <h2 id="content-title"></h2>
+        <div class="posts-container"></div>
+    </main>
+    <template id="post-tile-template">
+        <div class="post-tile">
+            <div class="post-content">
+                <h2 class="post-title"></h2>
+                <p class="post-content">
+                </p>
+            </div>
+            <a class="comments-link" href="">Comments</a>
+        </div>
+    </template>
+</body>
+
+</html>
