@@ -1,9 +1,19 @@
-# module-308A
+# sba-308A
 
-## Branches
+## About the Project
 
--   alab/308A.3.1 - [[source-code](https://github.com/dean-ferreira/module-308A/tree/alab/308A.3.1)]
+This assessment measures capability to implement advanced JavaScript tools and features in a practical manner.
 
--   r-alab/308A.4.1 - [[source-code](https://github.com/dean-ferreira/module-308A/tree/r-alab/308A.4.1)]
+## Objectives
 
--   sba-308A - [[source-code](https://github.com/dean-ferreira/module-308A/tree/sba-308A)]
+-   Use asynchronous JavaScript tools to build a responsive web application.
+-   Demonstrate understanding of the JavaScript event loop.
+-   Generate asynchronous code using Promises and async/await syntax.
+-   Use fetch and/or Axios to interact with an external web API.
+-   Organize files using modules and imports.
+
+## Built With
+
+-   HTML
+-   CSS
+-   JavaScript
