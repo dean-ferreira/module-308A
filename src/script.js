@@ -1,4 +1,4 @@
-import { getPosts } from './api.js';
+import { getPosts, getUserById } from './api.js';
 
 const contentTitle = document.querySelector('#content-title');
 const postsContainer = document.querySelector('.posts-container');
@@ -7,10 +7,12 @@ const postTileTemplate = document.querySelector('#post-tile-template');
 const homeLink = document.querySelector('#home-link');
 const allPostsLink = document.querySelector('#all-posts');
 
-function createPostTile(post) {
+async function createPostTile(post) {
     const postTile = postTileTemplate.content.cloneNode(true);
     postTile.querySelector('.post-title').innerText = post.title;
     postTile.querySelector('.post-body').innerText = post.body;
+    const user = await getUserById(post.userId);
+    postTile.querySelector('.author-link').innerText = user.name;
     postsContainer.appendChild(postTile);
 }
 
