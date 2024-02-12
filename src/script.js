@@ -7,6 +7,11 @@ const postTileTemplate = document.querySelector('#post-tile-template');
 const homeLink = document.querySelector('#home-link');
 const allPostsLink = document.querySelector('#all-posts');
 
+allPostsLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    displayAllPosts();
+});
+
 async function createPostTile(post) {
     const postTile = postTileTemplate.content.cloneNode(true);
     postTile.querySelector('.post-title').innerText = post.title;
