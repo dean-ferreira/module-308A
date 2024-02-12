@@ -1,4 +1,4 @@
-import { getPosts, getUserById } from './api.js';
+import { getPosts, getUserById, getCommentsByPostId } from './api.js';
 
 const contentTitle = document.querySelector('#content-title');
 const postsContainer = document.querySelector('.posts-container');
@@ -19,6 +19,13 @@ async function createPostTile(post) {
     postTile.querySelector('.post-body').innerText = post.body;
     const user = await getUserById(post.userId);
     postTile.querySelector('.author-link').innerText = user.name;
+    const allComments = await getCommentsByPostId(post.id);
+    const commentsLink = postTile.querySelector('.comments-link');
+    commentsLink.innerText = `${allComments.length} comments`;
+    commentsLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        displayAllComments(post);
+    });
     postsContainer.appendChild(postTile);
 }
 
@@ -37,6 +44,19 @@ async function displayLatestPosts() {
     postsContainer.innerHTML = '';
     for (let i = allPosts.length - 1; i > allPosts.length - 6; i--) {
         createPostTile(allPosts[i]);
+    }
+}
+
+async function displayAllComments(post) {
+    let allComments = await getCommentsByPostId(post.id);
+    postsContainer.innerHTML = '';
+    contentTitle.innerText = `${post.title}`;
+    for (let comment of allComments) {
+        const commentTile = postTileTemplate.content.cloneNode(true);
+        commentTile.querySelector('.post-title').innerText = comment.name;
+        commentTile.querySelector('.post-body').innerText = comment.body;
+        commentTile.querySelector('.author-link').innerText = comment.email;
+        postsContainer.appendChild(commentTile);
     }
 }
 
