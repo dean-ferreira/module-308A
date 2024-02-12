@@ -60,7 +60,7 @@ async function displayLatestPosts() {
 async function displayAllComments(post) {
     let allComments = await getCommentsByPostId(post.id);
     postsContainer.innerHTML = '';
-    contentTitle.innerText = `${post.title}`;
+    contentTitle.innerText = 'Comment Section';
     for (let comment of allComments) {
         const commentTile = postTileTemplate.content.cloneNode(true);
         commentTile.querySelector('.post-title').innerText = comment.name;
