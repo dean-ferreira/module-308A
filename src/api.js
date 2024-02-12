@@ -48,6 +48,20 @@ export async function getUserById(id) {
     }
 }
 
+export async function getPostsByUserId(id) {
+    try {
+        const response = await fetch(`${API_URL}/users/${id}/posts`);
+        const json = await response.json();
+        const posts = [];
+        for (let post of json) {
+            posts.push(post);
+        }
+        return posts;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export async function createPost(_title, _body, _userId) {
     try {
         const response = await fetch(`${API_URL}/posts`, {

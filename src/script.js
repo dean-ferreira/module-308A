@@ -1,4 +1,9 @@
-import { getPosts, getUserById, getCommentsByPostId } from './api.js';
+import {
+    getPosts,
+    getUserById,
+    getCommentsByPostId,
+    getPostsByUserId,
+} from './api.js';
 
 const contentTitle = document.querySelector('#content-title');
 const postsContainer = document.querySelector('.posts-container');
@@ -18,7 +23,12 @@ async function createPostTile(post) {
     postTile.querySelector('.post-title').innerText = post.title;
     postTile.querySelector('.post-body').innerText = post.body;
     const user = await getUserById(post.userId);
-    postTile.querySelector('.author-link').innerText = user.name;
+    const authorLink = postTile.querySelector('.author-link');
+    authorLink.innerText = user.name;
+    authorLink.addEventListener('click', (event) => {
+        event.preventDefault();
+        displayPostsByAuthor(post);
+    });
     const allComments = await getCommentsByPostId(post.id);
     const commentsLink = postTile.querySelector('.comments-link');
     commentsLink.innerText = `${allComments.length} comments`;
@@ -57,6 +67,16 @@ async function displayAllComments(post) {
         commentTile.querySelector('.post-body').innerText = comment.body;
         commentTile.querySelector('.author-link').innerText = comment.email;
         postsContainer.appendChild(commentTile);
+    }
+}
+
+async function displayPostsByAuthor(post) {
+    let author = await getUserById(post.userId);
+    let allPosts = await getPostsByUserId(author.id);
+    postsContainer.innerHTML = '';
+    contentTitle.innerText = `Posts by ${author.name}`;
+    for (let post of allPosts) {
+        createPostTile(post);
     }
 }
 
