@@ -7,16 +7,10 @@ const createPostTemplate = document.querySelector('#create-post-template');
 
 const homeLink = document.querySelector('#home-link');
 const allPostsLink = document.querySelector('#all-posts');
-const createPostLink = document.querySelector('#create-post');
 
 allPostsLink.addEventListener('click', (event) => {
     event.preventDefault();
     displayAllPosts();
-});
-
-createPostLink.addEventListener('click', (event) => {
-    event.preventDefault();
-    displayCreatePostForm();
 });
 
 async function createPostTile(post) {
@@ -44,13 +38,6 @@ async function displayLatestPosts() {
     for (let i = allPosts.length - 1; i > allPosts.length - 6; i--) {
         createPostTile(allPosts[i]);
     }
-}
-
-function displayCreatePostForm() {
-    contentTitle.innerText = 'Create Post';
-    postsContainer.innerHTML = '';
-    const createPost = createPostTemplate.content.cloneNode(true);
-    postsContainer.appendChild(createPost);
 }
 
 async function init() {
